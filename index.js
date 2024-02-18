@@ -5,6 +5,8 @@ const path = require("path");
 
 let port = 8001;
 
+app.use(express.static("public"));
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views")); 
 
@@ -31,5 +33,10 @@ app.get("/ig/:username", (req,res)=>{
 
     console.log(data);
     // res.render("insta.ejs", {username, follower} );
-    res.render("insta.ejs", {data});
+    if(data){
+        res.render("insta.ejs", {data});
+    }
+    else{
+        res.render("error.ejs");
+    }
 });
